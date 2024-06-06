@@ -55,8 +55,22 @@ def main():
 
     for index, row in data.iterrows():
         author = int(row[0])
+
+        # print(author, len(number_texts))
+        # Dynamically resize the list if the author index is out of range
+        if author >= len(number_texts):
+            number_texts.extend([0] * (author - len(number_texts) + 1))
+
         number_texts[author] += 1
         filtered_sentence = row['text'].replace('\n', '').strip()
+
+        # Dynamically resize the list if the author index is out of range
+        if author >= len(texts):
+            texts.extend( [''] * (author - len(texts) + 1))
+
+        # Dynamically resize the list if the author index is out of range
+        if author >= len(pos_texts):
+            pos_texts.extend( [''] * (author - len(pos_texts) + 1))
 
         texts[author] = ' '.join([texts[author], filtered_sentence])
         pos_texts[author] = ''.join([pos_texts[author], row[2]])
