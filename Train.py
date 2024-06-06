@@ -94,11 +94,12 @@ def main():
     y = []
     processed = 0
     for index, row in data.iterrows():
+        print(row, data.columns)
         if(processed % 1000 == 0):
             print(f'{processed} texts processed')
 
         y.append(int(row['label']))
-        X.append(ngram_rep(row['text'], row['text'], args.V, n_grams, args.V, pos_n_grams, args.V, word_n_grams))
+        X.append(ngram_rep(row['text'], row['POS'], (args.V, n_grams, args.V, pos_n_grams, args.V, word_n_grams)))
 
         processed += 1
 
