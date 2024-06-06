@@ -43,7 +43,6 @@ def main():
 
     print('------------', '\n', 'Tagging...')
     
-    return
     data['POS'] = tag(data['text'])
 
     print('------------', '\n', 'Counting and aggregating texts...')
