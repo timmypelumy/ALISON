@@ -129,11 +129,19 @@ def ngram_rep(text, pos_text, features):
         for n_gram in features[0][idx]:
             to_ret.append(text.count(''.join(n_gram)) / num_ngrams if num_ngrams != 0 else 0)
 
-    for idx in range(len(features[1])):
-        num_pos_ngrams = len(Counter(ngrams(pos_text, len(features[1][idx][0]))))
 
-        for pos_n_gram in features[1][idx]:
-            to_ret.append(pos_text.count(''.join(pos_n_gram)) / num_pos_ngrams if num_pos_ngrams != 0 else 0)
+    # handle empty cases 
+    if features[1]:
+
+        for idx in range(len(features[1])):
+            num_pos_ngrams = len(Counter(ngrams(pos_text, len(features[1][idx][0]))))
+
+            for pos_n_gram in features[1][idx]:
+                to_ret.append(pos_text.count(''.join(pos_n_gram)) / num_pos_ngrams if num_pos_ngrams != 0 else 0)
+    
+    else:
+        to_ret.append(0)
+
 
     words = tokenize(text)
     spaced_text = ' '.join(words)
