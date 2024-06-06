@@ -94,13 +94,13 @@ def main():
     y = []
     processed = 0
     for index, row in data.iterrows():
-        print(row, data.columns)
+        
         if(processed % 1000 == 0):
             print(f'{processed} texts processed')
 
         y.append(int(row['label']))
 
-        print("Features: ", n_grams, pos_n_grams, word_n_grams)
+        # print("Features: ", n_grams, pos_n_grams, word_n_grams)
         if pos_n_grams:
 
             X.append(ngram_rep(row['text'], row['POS'], (n_grams, pos_n_grams, word_n_grams) ))
@@ -112,7 +112,7 @@ def main():
     X = np.array(X)
     y = np.array(y)
 
-    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=args.test_size, random_state=1, shuffle=False, stratify=y)
+    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=args.test_size, random_state=1,  stratify=y)
 
     print('------------', '\n', 'Scaling, Loading, and Shuffling Data')
     Scaler = sklearn.preprocessing.StandardScaler().fit(X_train)

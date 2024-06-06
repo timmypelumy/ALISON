@@ -130,26 +130,35 @@ def ngram_rep(text, pos_text, features):
             to_ret.append(text.count(''.join(n_gram)) / num_ngrams if num_ngrams != 0 else 0)
 
 
-    # handle empty cases 
-    if features[1]:
+    
 
-        for idx in range(len(features[1])):
+    for idx in range(len(features[1])):
+
+        if features[1][idx]:
             num_pos_ngrams = len(Counter(ngrams(pos_text, len(features[1][idx][0]))))
 
             for pos_n_gram in features[1][idx]:
                 to_ret.append(pos_text.count(''.join(pos_n_gram)) / num_pos_ngrams if num_pos_ngrams != 0 else 0)
+        else:
+            # print("Skipping empty pos_n_grams...")
+            pass
+                
     
-    else:
-        to_ret.append(0)
-
-
+   
     words = tokenize(text)
     spaced_text = ' '.join(words)
-    for idx in range(len(features[2])):
-        num_word_ngrams = len(Counter(ngrams(words, len(features[2][idx][0]))))
 
-        for word_ngram in features[2][idx]:
-            to_ret.append(spaced_text.count(' '.join(word_ngram)) / num_word_ngrams if num_word_ngrams != 0 else 0)
+    for idx in range(len(features[2])):
+
+        if features[2][idx]:
+            num_word_ngrams = len(Counter(ngrams(words, len(features[2][idx][0]))))
+
+            for word_ngram in features[2][idx]:
+                to_ret.append(spaced_text.count(' '.join(word_ngram)) / num_word_ngrams if num_word_ngrams != 0 else 0)
+
+        else:
+            # print("Skipping empty word_n_grams...")
+            pass
 
     return to_ret
 
