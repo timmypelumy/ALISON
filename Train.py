@@ -42,6 +42,8 @@ def main():
         data = pd.DataFrame(data = {'label' : labels, 'text' : texts})
 
     print('------------', '\n', 'Tagging...')
+    
+    return
     data['POS'] = tag(data['text'])
 
     print('------------', '\n', 'Counting and aggregating texts...')
@@ -97,7 +99,7 @@ def main():
             print(f'{processed} texts processed')
 
         y.append(int(row['label']))
-        X.append(ngram_rep(row['text'], row['POS_text'], args.V, n_grams, args.V, pos_n_grams, args.V, word_n_grams))
+        X.append(ngram_rep(row['text'], row['text'], args.V, n_grams, args.V, pos_n_grams, args.V, word_n_grams))
 
         processed += 1
 
