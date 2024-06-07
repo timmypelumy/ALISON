@@ -133,7 +133,7 @@ def main():
     features = [n_grams, pos_n_grams, word_n_grams]
     pickle.dump(features, open(os.path.join(save_path, 'features.pkl'), 'wb'))
 
-    model = Model(len(X_train[0]), args.num_authors)
+    model = Model(len(X_train[0]), args.authors_total)
     
     loss_function = nn.CrossEntropyLoss(weight = torch.Tensor(number_texts).to(device))
     optimizer = optim.Adam(model.parameters(), lr = args.learning_rate, weight_decay = args.weight_decay)
