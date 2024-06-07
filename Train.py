@@ -105,7 +105,8 @@ def main():
 
             X.append(ngram_rep(row['text'], row['POS'], (n_grams, pos_n_grams, word_n_grams) ))
         else:
-            print("pos_n_grams is empty, skipping...")
+            # print("pos_n_grams is empty, skipping...")
+            pass
 
         processed += 1
 
