@@ -8,7 +8,7 @@ import time
 
 
 from captum.attr import IntegratedGradients
-import tqdm
+from tqdm import tqdm
 import os
 import gc
 
